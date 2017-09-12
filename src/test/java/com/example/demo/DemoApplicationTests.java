@@ -68,10 +68,4 @@ public class DemoApplicationTests {
         CustomerInfo customerInfoBy = customerInfoService.findCustomerInfoByIdAndYearAndMonth(100000, 2016, 6);
         Assert.assertNull(customerInfoBy);
     }
-
-    @Test
-	public void canLoadCustomerInfo() {
-        Assert.fail("Not implemented");
-    }
-
 }

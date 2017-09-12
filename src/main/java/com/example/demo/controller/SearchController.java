@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.db.CustomerInfo;
 import com.example.demo.model.form.CustomerSearchForm;
 import com.example.demo.service.SearchCustomerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,12 @@ public class SearchController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(@Valid @ModelAttribute(value = "customer") CustomerSearchForm customerSearchForm, BindingResult bindingResult, Model model) {
-        searchCustomerInfoService.findCustomerInfoByIdAndYearAndMonth(customerSearchForm.getId(), 2016, 6);
-        return "search";
+        if (bindingResult.hasErrors()) {
+            return "search";
+        }
+        CustomerInfo info = searchCustomerInfoService.findCustomerInfoByIdAndYearAndMonth(customerSearchForm.getId(), customerSearchForm.getYear(), customerSearchForm.getMonth());
+        model.addAttribute("customer", customerSearchForm);
+        customerSearchForm.setCustomerInfo(info);
+        return "customerInfo";
     }
 }

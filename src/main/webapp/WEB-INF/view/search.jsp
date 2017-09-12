@@ -27,6 +27,26 @@
                     </script>
                 </form:errors>
             </div>
+            <div class="form-group" id="yearId">
+                <form:label path="year">Year</form:label>
+                <form:input path="year" cssClass="form-control"/>
+                <form:errors path="year">
+                    <form:errors path="year" cssClass="help-inline"/>
+                    <script type="text/javascript">
+                        $("#yearId").addClass("has-error");
+                    </script>
+                </form:errors>
+            </div>
+            <div class="form-group" id="monthId">
+                <form:label path="month">Month</form:label>
+                <form:input path="month" cssClass="form-control"/>
+                <form:errors path="month">
+                    <form:errors path="month" cssClass="help-inline"/>
+                    <script type="text/javascript">
+                        $("#monthId").addClass("has-error");
+                    </script>
+                </form:errors>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Search" class="btn btn-default"/>
             </div>
