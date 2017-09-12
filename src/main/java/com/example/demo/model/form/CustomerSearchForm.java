@@ -1,10 +1,10 @@
-package com.example.demo.model;
+package com.example.demo.model.form;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class CustomerInfo {
+public class CustomerSearchForm {
     @NotNull
     @Min(value = 0)
     @Max(value = Integer.MAX_VALUE)
