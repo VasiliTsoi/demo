@@ -1,6 +1,7 @@
 package com.example.demo.model.db;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NamedStoredProcedureQuery(
         name = CustomerInfo.GET_CUSTOMER_INFO,
@@ -23,9 +24,10 @@ public class CustomerInfo {
     private Boolean bigTicketSpender;
     private Boolean potentialSaver;
     private String personType;
+    private List<CustomerTransaction> transactions;
 
     @Id
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", insertable = false, updatable = false)
     public Integer getCustomerId() {
         return customerId;
     }
@@ -86,5 +88,14 @@ public class CustomerInfo {
 
     public void setPersonType(String personType) {
         this.personType = personType;
+    }
+
+    @Transient
+    public List<CustomerTransaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<CustomerTransaction> transactions) {
+        this.transactions = transactions;
     }
 }

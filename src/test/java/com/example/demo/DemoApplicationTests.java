@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.example.demo.controller.SearchController;
 import com.example.demo.dao.CustomerInfoRepository;
 import com.example.demo.model.db.CustomerInfo;
+import com.example.demo.service.SearchCustomerInfoService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class DemoApplicationTests {
     private SearchController searchController;
 
     @Autowired
-    CustomerInfoRepository customerInfoRepository;
+    SearchCustomerInfoService customerInfoService;
 
     @Autowired
     EntityManager em;
@@ -55,11 +56,17 @@ public class DemoApplicationTests {
         Assert.assertFalse(resultList.isEmpty());
     }
 
+    @Test
+    public void searchCustomerInfoWithService(){
+        CustomerInfo customerInfoBy = customerInfoService.findCustomerInfoByIdAndYearAndMonth(1, 2016, 6);
+        Assert.assertNotNull(customerInfoBy);
+        Assert.assertFalse(customerInfoBy.getTransactions().isEmpty());
+    }
 
     @Test
-    public void searchCustomerInfoWithRepository(){
-        CustomerInfo customerInfoBy = customerInfoRepository.findCustomerInfoByIdAndYearAndMonth(1, 2016, 6);
-        Assert.assertNotNull(customerInfoBy);
+    public void noCustomerInfoWithService(){
+        CustomerInfo customerInfoBy = customerInfoService.findCustomerInfoByIdAndYearAndMonth(100000, 2016, 6);
+        Assert.assertNull(customerInfoBy);
     }
 
     @Test
